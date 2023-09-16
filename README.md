@@ -1,3 +1,23 @@
+# PreEntrega2-Aguada
+Segunda pre entrega del curso de javascrip dictado por Coder House. Comisión: 47045
+
+Antes que nada, señalo que los detalles de la primera pre-entrega quedaron debajo.
+
+Implementaciones respecto a la consigna.
+- La totalidad de los procesos contenidos en funciones.
+- Funciones generales para reutilizarlas.
+- Creacion de objetos: constructores e instanciaciones.
+- Uso de métodos de clase.
+- Se mejoró la performance del código al menos variables auxiliares.
+- Uso de metodos de listas:
+    - map()
+    - splice()
+    - sort()
+    - slice()
+    - indexOf
+    - find()
+
+
 # PreEntrega1-Aguada
 Primera pre entrega del curso de javascrip dictado por Coder House. Comisión: 47045
 
