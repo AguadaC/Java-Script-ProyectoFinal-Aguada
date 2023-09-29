@@ -61,6 +61,7 @@ const combo_d = new Combo("AXILA-BOZO", 1000);
 const combo_e = new Combo("AXILA-CAVADO-TIRO-PIERNA_COMPLETA", 3200);
 
 // Arrays contenedores
+// Seteamos validZones
 const validZones = []
 if(localStorage.getItem("validZones")){
     for(let zone of JSON.parse(localStorage.getItem("validZones"))){
@@ -69,7 +70,7 @@ if(localStorage.getItem("validZones")){
    }
 
 }else{
-   console.log("Primera carga")
+   console.log("Primera carga de Zonas")
    validZones.push(
     area_bozo,
     area_rostro_completo,
@@ -92,6 +93,24 @@ if(localStorage.getItem("validZones")){
     area_barba);
    localStorage.setItem("validZones", JSON.stringify(validZones))
 }
-//setear productosCarrito con operador Nullish
+
+// Seteamos validCombos
+const validCombos = []
+if(localStorage.getItem("validCombos")){
+    for(let combo of JSON.parse(localStorage.getItem("validCombos"))){
+        let new_combo_to_save = new Combo (combo.name, combo.price)
+        validZones.push(new_combo_to_save)
+   }
+}else{
+   console.log("Primera carga de Combos")
+   validCombos.push(combo_a, combo_b, combo_c, combo_d, combo_e);
+   localStorage.setItem("validCombos", JSON.stringify(validCombos))
+}
+
+
+//setear selectedZones
+
+if (localStorage.getItem("selectedZones") == null) {
+    localStorage.setItem("selectedZones", JSON.stringify([]))
+}
 let selectedZones = JSON.parse(localStorage.getItem("selectedZones")) ?? []
-console.log(selectedZones)

@@ -19,15 +19,30 @@ function showZones(array){
             <button id="selectToggle${zone.name}" class="btn btn-primary">Add to selection</button>
             </div>
         </div>`
-        validZonesCards.append(newZoneCard)
 
         const selectToggleBtn = newZoneCard.querySelector(`#selectToggle${zone.name}`);
         const cardBody = newZoneCard.querySelector(`#cardToggle${zone.name}`);
-        selectToggleBtn.addEventListener("click", () => toggleButtonText(selectToggleBtn, cardBody));
+
+        //Chequeo si esta seleccionado
+        let exist = selectedZones.filter(
+            (element) => element.name == zone.name
+        )
+        //Si esta seleccionado le cambio el estilo
+        if (exist.length != 0) {
+            toggleStyle(selectToggleBtn, cardBody)
+        }
+        validZonesCards.append(newZoneCard)
+        //Si cliqueo alli, debo agregarlo o desagregarlo de la lista y cambiar el estilo
+        selectToggleBtn.addEventListener("click",
+         () => {
+            toggleStyle(selectToggleBtn, cardBody);
+            addRemoveZone(zone);
+            }
+        );
     }
 }
 
-function toggleButtonText(button, card) {
+function toggleStyle(button, card) {
     if (button.innerText === "Add to selection") {
         button.innerText = "Remove from selection";
         button.classList.remove("btn-primary");
@@ -39,6 +54,25 @@ function toggleButtonText(button, card) {
         button.classList.add("btn-primary");
         card.classList.remove("border-success");
     }
+}
+
+function addRemoveZone(zone) {
+    //Chequeo si esta seleccionado
+    let exist = selectedZones.filter(
+        (element) => element.name == zone.name
+    )
+    //Si esta seleccionado le cambio el estilo
+    if (exist.length == 0) {
+        selectedZones.push(zone);
+        console.log("Zona agregada")
+    } else {
+        selectedZones = selectedZones.filter(
+            element => element.name !== zone.name
+        )
+        console.log("Zona removida")
+    }
+
+    localStorage.setItem("selectedZones", JSON.stringify(selectedZones))
 }
 
 function priceDesc(array){
