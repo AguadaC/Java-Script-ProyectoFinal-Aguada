@@ -4,15 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre-Entrega-1</title>
+    <title>Simulator</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!--CSS-->
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    <section class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <img src="./images/banner_unificated.svg" alt="Banner Lives" class="img-fluid w-100">
+          </div>
+          <div class="text-center col-12 p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+            <h2 >Calculadora de precios de sesion de depilación definitiva</h2>
+          </div>
+        </div>
+    </section>
 
-    <h1>Bienvenido a mi primer simulador interactivo en JavaScript.</h1>
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand">LIVES</a>
 
-    <p>Simularé el costo final de una sesión de Depilación definitiva de un consultorio dermatofuncional.</p>
-    <p>Según las zonas que la persona elija tratar, será el costo.</p>
-    <p>En el mismo se tienen en cuenta Combos de tratamiento.</p>
-    <script src="./simulator.js"></script>
+          <ul>
+            <select id="selectOrden" class="form-select form-select-sm" aria-label=".form-select-sm example">
+              <option selected>Ordenar por:</option>
+              <option value="1">Mayor a menor</option>
+              <option value="2">Menor a mayor</option>
+              <option value="3">Alfabeticamente</option>
+            </select>
+          </ul>
+
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="validZonesCards" class="row">
+        </div>
+    </div>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="./js_files/constructor.js"></script>
+    <script src="./js_files/main.js"></script>
 </body>
 </html>
