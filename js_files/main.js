@@ -1,13 +1,13 @@
-//CAPTURA DOM
+// CAPTURA DOM
 let validZonesCards = document.getElementById("validZonesCards")
+let selectOrder = document.getElementById("selectOrder")
 
 
-//FUNCTIONS: 
+// FUNCTIONS: 
 
 function showZones(array){
     validZonesCards.innerHTML = ""
     for(let zone of array){
-        console.log(zone)
         let newZoneCard = document.createElement("div")
         newZoneCard.className = "col-12 col-md-6 col-lg-4 my-2"
         newZoneCard.innerHTML = `
@@ -32,16 +32,67 @@ function toggleButtonText(button, card) {
         button.innerText = "Remove from selection";
         button.classList.remove("btn-primary");
         button.classList.add("btn-danger");
-        card.classList.remove("border-primary");
         card.classList.add("border-success");
     } else {
         button.innerText = "Add to selection";
         button.classList.remove("btn-danger");
         button.classList.add("btn-primary");
         card.classList.remove("border-success");
-        card.classList.add("border-primary");
     }
 }
 
-//CÓDIGO
+function priceDesc(array){
+    //copiar array: 
+    let arrayMayorMenor = array.concat()
+    
+     arrayMayorMenor.sort(
+        (par1,par2) => par2.price - par1.price
+    )
+    showZones(arrayMayorMenor)
+}
+function priceAsc(ar){
+    let arrMenor = ar.concat()
+    arrMenor.sort(
+        //menor a mayor
+        (a, b) => a.price - b.price
+    )
+    showZones(arrMenor)
+}
+function abcOrder(array){
+    let ordenadoAlf = array.concat()
+    ordenadoAlf.sort(
+        (a,b) => {
+            if(a.name > b.name){
+                return 1
+            }
+            if(a.name < b.name){
+                return -1
+            }
+            //no es ni mayor ni menor
+            return 0
+        }
+    )
+    showZones(ordenadoAlf)
+}
+
+// EVENTOS
+selectOrder.addEventListener("change", () => {
+    console.log(selectOrder.value)
+    switch(selectOrder.value){
+        case "1":
+            priceDesc(validZones)
+        break
+        case "2":
+            priceAsc(validZones)
+        break
+        case "3":
+            abcOrder(validZones)
+        break
+        default:
+            showZones(validZones)
+        break
+    }
+})
+
+// CÓDIGO
 showZones(validZones)
