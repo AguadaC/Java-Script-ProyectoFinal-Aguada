@@ -99,7 +99,7 @@ const validCombos = []
 if(localStorage.getItem("validCombos")){
     for(let combo of JSON.parse(localStorage.getItem("validCombos"))){
         let new_combo_to_save = new Combo (combo.name, combo.price)
-        validZones.push(new_combo_to_save)
+        validCombos.push(new_combo_to_save)
    }
 }else{
    console.log("Primera carga de Combos")
@@ -107,10 +107,13 @@ if(localStorage.getItem("validCombos")){
    localStorage.setItem("validCombos", JSON.stringify(validCombos))
 }
 
-
+const selectedZones = []
 //setear selectedZones
-
-if (localStorage.getItem("selectedZones") == null) {
-    localStorage.setItem("selectedZones", JSON.stringify([]))
+if (localStorage.getItem("selectedZones")){
+    for(let zone of JSON.parse(localStorage.getItem("selectedZones"))){
+        let new_zone_to_select = new BodyArea (zone.name, zone.price, zone.image)
+        selectedZones.push(new_zone_to_select)
+    }
+}else{
+    localStorage.setItem("selectedZones", JSON.stringify(selectedZones))
 }
-let selectedZones = JSON.parse(localStorage.getItem("selectedZones")) ?? []

@@ -1,6 +1,9 @@
 // CAPTURA DOM
 let validZonesCards = document.getElementById("validZonesCards")
 let selectOrder = document.getElementById("selectOrder")
+let paymentButton = document.getElementById("paymentBtn")
+let modalBodyPayment = document.getElementById("modal-bodyCarrito")
+let totalPrice = document.getElementById("totalPrice")
 
 
 // FUNCTIONS: 
@@ -41,7 +44,6 @@ function showZones(array){
         );
     }
 }
-
 function toggleStyle(button, card) {
     if (button.innerText === "Add to selection") {
         button.innerText = "Remove from selection";
@@ -55,7 +57,6 @@ function toggleStyle(button, card) {
         card.classList.remove("border-success");
     }
 }
-
 function addRemoveZone(zone) {
     //Chequeo si esta seleccionado
     let exist = selectedZones.filter(
@@ -66,14 +67,19 @@ function addRemoveZone(zone) {
         selectedZones.push(zone);
         console.log("Zona agregada")
     } else {
-        selectedZones = selectedZones.filter(
+        let selectedZones_aux = selectedZones.filter(
             element => element.name !== zone.name
         )
+        selectedZones.splice(0)
+        for (zone_aux of selectedZones_aux){
+            selectedZones.push(zone_aux)
+        }
         console.log("Zona removida")
     }
 
     localStorage.setItem("selectedZones", JSON.stringify(selectedZones))
 }
+
 
 function priceDesc(array){
     //copiar array: 
@@ -109,6 +115,80 @@ function abcOrder(array){
     showZones(ordenadoAlf)
 }
 
+
+function takeSale(selectedZones, validCombos){
+    // devuelve el combo de mayor precio que se encuentra en el pedido
+    const zonaNames = selectedZones.map(zone => zone.name);
+
+    validCombos.sort((a, b) => b.price - a.price);
+
+    for (let combo of validCombos) {
+        let comboZones = combo.get_combo_name().split("-");
+        if (comboZones.every(comboZone => zonaNames.includes(comboZone))){
+            console.log(`Se enontro el combo: ${comboZones}`)
+            return combo
+        }
+    }
+    console.log("No hay combo valido detectado")
+    return "No hay combo valido detectado"
+}
+function payment(selectedZones){
+    // muestra cuanto debemos pagar
+    let totalPrecioIndividual = 0;
+    for (let zona of selectedZones) {
+        if (zona.get_area_price()) {
+            totalPrecioIndividual += zona.get_area_price();
+        }
+    }
+    return totalPrecioIndividual
+}
+function recalcPayment(selectedZones, comboSeleccionado){
+    //detecta si hay un combo y hace un recalculo del precio
+    let combinedPrice = 0
+    let zones_aux_copy = selectedZones.slice()
+    if (typeof comboSeleccionado !== 'string' &&
+        validCombos.find(
+            combo => combo.get_combo_name() === comboSeleccionado.get_combo_name()
+        )){
+        console.log(`Combo validado: ${comboSeleccionado.get_combo_name()}`)
+
+        combinedPrice = comboSeleccionado.get_combo_price()
+        for (let comboElementName of comboSeleccionado.get_combo_name().split("-")){
+            let index
+            objectZone = zones_aux_copy.find(zone => zone.get_area_name() === comboElementName)
+            if (objectZone != undefined){
+                index = zones_aux_copy.indexOf(objectZone)
+                zones_aux_copy.splice(index, 1);
+            } else {
+                console.log(`Cuidado, un elemento del combo no fue encontrado: ${comboElementName}`)
+            }
+        }
+    } else {
+        console.log(`No posee descuento por combo.`)
+    }
+
+    combinedPrice = parseInt(combinedPrice) + parseInt(payment(zones_aux_copy))
+    console.log(`Precio combinado: ${combinedPrice}`)
+    return combinedPrice
+}
+
+function uploadDetail(array){
+    modalBodyPayment.innerHTML = ""
+    array.forEach(
+        (productoCarrito) => {
+            modalBodyPayment.innerHTML += `
+            <div class="card border-primary mb-3" id ="productoCarrito${productoCarrito.name}" style="max-width: 540px;">
+                 <div class="card-body">
+                        <h4 class="card-title">${productoCarrito.name}</h4>
+                        <p class="card-text">$${productoCarrito.price}</p> 
+                 </div>
+            </div>
+            `
+        }
+    )
+}
+
+
 // EVENTOS
 selectOrder.addEventListener("change", () => {
     console.log(selectOrder.value)
@@ -128,5 +208,12 @@ selectOrder.addEventListener("change", () => {
     }
 })
 
+paymentButton.addEventListener("click", () => {
+    console.log("Pagando")
+    uploadDetail(selectedZones)
+    comboSeleccionado = takeSale(selectedZones, validCombos)
+    totalToPay = recalcPayment(selectedZones, comboSeleccionado, validZones)
+    totalToPay > 0 ? totalPrice.innerHTML = `<strong>El total de su compra es: ${totalToPay}</strong>` : totalPrice.innerHTML = `No hay productos en el carrito` 
+})
 // CÓDIGO
 showZones(validZones)
