@@ -22,7 +22,6 @@
 
     <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand">LIVES</a>
           <ul>
             <select id="selectOrder" class="form-select form-select-sm" aria-label=".form-select-sm example">
               <option selected>Ordenar por:</option>
@@ -35,7 +34,7 @@
             <input id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           </ul>
           <ul>
-            <button id="showComboBtn" data-bs-toggle="modal" data-bs-target="#idModalCombos" class="btn btn-outline-primary">COMBOS</button>
+            <button id="showComboBtn" data-bs-toggle="modal" data-bs-target="#idModalCombos" class="btn btn-outline-warning">COMBOS</button>
           </ul>
           <ul>
             <button id="paymentBtn" data-bs-toggle="modal" data-bs-target="#idModalCarrito" class="btn btn-outline-success">PAGAR</button>
@@ -68,7 +67,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" data-bs-dismiss="modal" class="btn btn-success" id="botonFinalizarCompra">Finalizar Compra</button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-success" id="finalizePurchaseButton">Finalizar Compra</button>
           </div>
         </div>
       </div>

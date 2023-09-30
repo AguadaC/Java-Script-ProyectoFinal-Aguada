@@ -8,6 +8,7 @@ let search = document.getElementById("search")
 let itemsFound = document.getElementById("itemsFound")
 let comboButton = document.getElementById("showComboBtn")
 let modalBodyCombo = document.getElementById("modal-bodyCombo")
+let finalizePurchaseButton = document.getElementById("finalizePurchaseButton")
 
 
 // FUNCTIONS: 
@@ -240,5 +241,13 @@ search.addEventListener("input", ()=> {
     searchZones(search, validZones)
 }
 )
+
+finalizePurchaseButton.addEventListener("click", () => {
+    selectedZones.splice(0);
+    localStorage.setItem("selectedZones", JSON.stringify(selectedZones));
+    console.log("Compra finalizada.");
+    showZones(validZones)
+})
+
 // CÓDIGO
 showZones(validZones)
