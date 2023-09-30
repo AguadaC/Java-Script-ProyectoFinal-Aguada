@@ -14,7 +14,7 @@ ahora se ingresan por interacción con botones o inputs y se visualizan mediante
 -Estado de las zonas: Si seleccionamos una zona, pulsando en el boton de agregar, cambia su estado y queda seleccionada.
     Esto se ve reflejado en el storage. Y si recargo la página, se mantine este estado.
 
-    ![](extern_resources/cardStatus.gif)
+    ![](./extern_resources/cardStatus.gif)
 
 # PreEntrega2-Aguada
 Segunda pre entrega del curso de javascrip dictado por Coder House. Comisión: 47045
