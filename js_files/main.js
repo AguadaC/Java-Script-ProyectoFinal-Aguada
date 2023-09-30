@@ -4,6 +4,8 @@ let selectOrder = document.getElementById("selectOrder")
 let paymentButton = document.getElementById("paymentBtn")
 let modalBodyPayment = document.getElementById("modal-bodyCarrito")
 let totalPrice = document.getElementById("totalPrice")
+let search = document.getElementById("search")
+let itemsFound = document.getElementById("itemsFound")
 
 
 // FUNCTIONS: 
@@ -188,6 +190,13 @@ function uploadDetail(array){
     )
 }
 
+function searchZones(search, array){
+    let itemsFound = array.filter(
+        (zone) => zone.name.toLowerCase().includes(search.value.toLowerCase())
+    )
+    console.log(itemsFound)
+    itemsFound.length > 0 ? (showZones(itemsFound), itemsFound.innerText ="") : (showZones(array), itemsFound.innerText = `Pruebe introduciendo otra zona`) 
+}
 
 // EVENTOS
 selectOrder.addEventListener("change", () => {
@@ -215,5 +224,10 @@ paymentButton.addEventListener("click", () => {
     totalToPay = recalcPayment(selectedZones, comboSeleccionado, validZones)
     totalToPay > 0 ? totalPrice.innerHTML = `<strong>El total de su compra es: ${totalToPay}</strong>` : totalPrice.innerHTML = `No hay productos en el carrito` 
 })
+
+search.addEventListener("input", ()=> {
+    searchZones(search, validZones)
+}
+)
 // CÓDIGO
 showZones(validZones)

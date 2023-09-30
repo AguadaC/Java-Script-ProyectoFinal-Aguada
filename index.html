@@ -34,7 +34,7 @@
             </select>
           </ul>
           <ul class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <input id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           </ul>
           <ul>
             <button id="paymentBtn" data-bs-toggle="modal" data-bs-target="#idModalCarrito" class="btn btn-outline-success">PAGAR</button>
@@ -46,6 +46,10 @@
         <div id="validZonesCards" class="row">
         </div>
     </div>
+
+    <h2 id="itemsFound" class="text-center">
+    </h2>
+
 
       <!--Modal Carrito-->
     <div class="modal fade" id="idModalCarrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
