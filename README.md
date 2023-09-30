@@ -1,3 +1,21 @@
+# PreEntrega3-Aguada
+Segunda pre entrega del curso de javascrip dictado por Coder House. Comisión: 47045
+
+Implementaciones respecto a la consigna.
+- Uso de JSON y STORGE: se usa para almacenar las variables globales del sistema como son:
+    - validZones
+    - validCombos
+    - selectedZones
+- Uso de DOM y detección de eventos: Todos los ingresos que se realizaban antes por promt y la información que se mostraba por alerts,
+ahora se ingresan por interacción con botones o inputs y se visualizan mediante estilos y otras interacciones.
+
+## Funcionamiento.
+
+-Estado de las zonas: Si seleccionamos una zona, pulsando en el boton de agregar, cambia su estado y queda seleccionada.
+    Esto se ve reflejado en el storage. Y si recargo la página, se mantine este estado.
+
+    ![](extern_resources/cardStatus.gif)
+
 # PreEntrega2-Aguada
 Segunda pre entrega del curso de javascrip dictado por Coder House. Comisión: 47045
 
