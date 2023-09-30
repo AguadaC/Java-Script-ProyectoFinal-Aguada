@@ -12,7 +12,6 @@ let finalizePurchaseButton = document.getElementById("finalizePurchaseButton")
 
 
 // FUNCTIONS: 
-
 function showZones(array){
     validZonesCards.innerHTML = ""
     for(let zone of array){
@@ -40,6 +39,7 @@ function showZones(array){
             toggleStyle(selectToggleBtn, cardBody)
         }
         validZonesCards.append(newZoneCard)
+
         //Si cliqueo alli, debo agregarlo o desagregarlo de la lista y cambiar el estilo
         selectToggleBtn.addEventListener("click",
          () => {
@@ -50,6 +50,7 @@ function showZones(array){
     }
 }
 function toggleStyle(button, card) {
+    // Cambia el estilo de la card segun la selección.
     if (button.innerText === "Add to selection") {
         button.innerText = "Remove from selection";
         button.classList.remove("btn-primary");
@@ -65,11 +66,12 @@ function toggleStyle(button, card) {
     }
 }
 function addRemoveZone(zone) {
-    //Chequeo si esta seleccionado
+    // Agrega o quita la zona del carrito
+    // Chequeo si esta seleccionado
     let exist = selectedZones.filter(
         (element) => element.name == zone.name
     )
-    //Si esta seleccionado le cambio el estilo
+    // Si esta seleccionado le cambio el estilo
     if (exist.length == 0) {
         selectedZones.push(zone);
         console.log("Zona agregada")
@@ -87,9 +89,7 @@ function addRemoveZone(zone) {
     localStorage.setItem("selectedZones", JSON.stringify(selectedZones))
 }
 
-
 function priceDesc(array){
-    //copiar array: 
     let arrayMayorMenor = array.concat()
     
      arrayMayorMenor.sort(
@@ -97,10 +97,9 @@ function priceDesc(array){
     )
     showZones(arrayMayorMenor)
 }
-function priceAsc(ar){
-    let arrMenor = ar.concat()
+function priceAsc(array){
+    let arrMenor = array.concat()
     arrMenor.sort(
-        //menor a mayor
         (a, b) => a.price - b.price
     )
     showZones(arrMenor)
@@ -115,16 +114,14 @@ function abcOrder(array){
             if(a.name < b.name){
                 return -1
             }
-            //no es ni mayor ni menor
             return 0
         }
     )
     showZones(ordenadoAlf)
 }
 
-
 function takeSale(selectedZones, validCombos){
-    // devuelve el combo de mayor precio que se encuentra en el pedido
+    // Devuelve el combo de mayor precio que se encuentra en el pedido
     const zonaNames = selectedZones.map(zone => zone.name);
 
     validCombos.sort((a, b) => b.price - a.price);
@@ -140,7 +137,7 @@ function takeSale(selectedZones, validCombos){
     return "No hay combo valido detectado"
 }
 function payment(selectedZones){
-    // muestra cuanto debemos pagar
+    // Muestra cuanto debemos pagar
     let totalPrecioIndividual = 0;
     for (let zona of selectedZones) {
         if (zona.get_area_price()) {
@@ -150,7 +147,7 @@ function payment(selectedZones){
     return totalPrecioIndividual
 }
 function recalcPayment(selectedZones, comboSeleccionado){
-    //detecta si hay un combo y hace un recalculo del precio
+    // Detecta si hay un combo y hace un recalculo del precio
     let combinedPrice = 0
     let zones_aux_copy = selectedZones.slice()
     if (typeof comboSeleccionado !== 'string' &&
@@ -180,6 +177,7 @@ function recalcPayment(selectedZones, comboSeleccionado){
 }
 
 function uploadDetail(array, nodo){
+    // Carga información a un modal
     nodo.innerHTML = ""
     array.forEach(
         (product) => {
@@ -196,6 +194,7 @@ function uploadDetail(array, nodo){
 }
 
 function searchZones(search, array){
+    // Busco zona de interés
     let itemsFound = array.filter(
         (zone) => zone.name.toLowerCase().includes(search.value.toLowerCase())
     )

@@ -107,8 +107,8 @@ if(localStorage.getItem("validCombos")){
    localStorage.setItem("validCombos", JSON.stringify(validCombos))
 }
 
+// Seteamos selectedZones
 const selectedZones = []
-//setear selectedZones
 if (localStorage.getItem("selectedZones")){
     for(let zone of JSON.parse(localStorage.getItem("selectedZones"))){
         let new_zone_to_select = new BodyArea (zone.name, zone.price, zone.image)
