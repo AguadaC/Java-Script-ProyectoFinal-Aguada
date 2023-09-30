@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.selectedMode {
+    color: azure;
+    background-color: rgb(4, 37, 99);
+}

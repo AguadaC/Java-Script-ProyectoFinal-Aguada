@@ -6,6 +6,8 @@ let modalBodyPayment = document.getElementById("modal-bodyCarrito")
 let totalPrice = document.getElementById("totalPrice")
 let search = document.getElementById("search")
 let itemsFound = document.getElementById("itemsFound")
+let comboButton = document.getElementById("showComboBtn")
+let modalBodyCombo = document.getElementById("modal-bodyCombo")
 
 
 // FUNCTIONS: 
@@ -52,11 +54,13 @@ function toggleStyle(button, card) {
         button.classList.remove("btn-primary");
         button.classList.add("btn-danger");
         card.classList.add("border-success");
+        card.classList.add("selectedMode");
     } else {
         button.innerText = "Add to selection";
         button.classList.remove("btn-danger");
         button.classList.add("btn-primary");
         card.classList.remove("border-success");
+        card.classList.remove("selectedMode");
     }
 }
 function addRemoveZone(zone) {
@@ -174,15 +178,15 @@ function recalcPayment(selectedZones, comboSeleccionado){
     return combinedPrice
 }
 
-function uploadDetail(array){
-    modalBodyPayment.innerHTML = ""
+function uploadDetail(array, nodo){
+    nodo.innerHTML = ""
     array.forEach(
-        (productoCarrito) => {
-            modalBodyPayment.innerHTML += `
-            <div class="card border-primary mb-3" id ="productoCarrito${productoCarrito.name}" style="max-width: 540px;">
+        (product) => {
+            nodo.innerHTML += `
+            <div class="card border-primary mb-3" id ="product${product.name}" style="max-width: 540px;">
                  <div class="card-body">
-                        <h4 class="card-title">${productoCarrito.name}</h4>
-                        <p class="card-text">$${productoCarrito.price}</p> 
+                        <h4 class="card-title">${product.name}</h4>
+                        <p class="card-text">$${product.price}</p> 
                  </div>
             </div>
             `
@@ -219,10 +223,17 @@ selectOrder.addEventListener("change", () => {
 
 paymentButton.addEventListener("click", () => {
     console.log("Pagando")
-    uploadDetail(selectedZones)
+    uploadDetail(selectedZones, modalBodyPayment)
     comboSeleccionado = takeSale(selectedZones, validCombos)
     totalToPay = recalcPayment(selectedZones, comboSeleccionado, validZones)
-    totalToPay > 0 ? totalPrice.innerHTML = `<strong>El total de su compra es: ${totalToPay}</strong>` : totalPrice.innerHTML = `No hay productos en el carrito` 
+    totalToPay > 0 ?
+    totalPrice.innerHTML = `<h5 class="modal-title text-center" id="exampleModalLabel">El total de su compra es: ${totalToPay}</h5>` :
+    totalPrice.innerHTML = `<h5 class="modal-title text-center" id="exampleModalLabel">NO hay elementos en su carrito.</h5>` 
+})
+
+comboButton.addEventListener("click", () => {
+    console.log("Accediendo a combos")
+    uploadDetail(validCombos, modalBodyCombo)
 })
 
 search.addEventListener("input", ()=> {
