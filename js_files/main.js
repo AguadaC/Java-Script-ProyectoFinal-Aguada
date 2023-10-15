@@ -198,7 +198,7 @@ function recalcPayment(selectedZones, comboSeleccionado){
     }
 
     combinedPrice = parseInt(combinedPrice) + parseInt(payment(zones_aux_copy))
-    console.log(`Precio combinado: ${combinedPrice}`)
+    console.log(`Precio: ${combinedPrice}`)
     return combinedPrice
 }
 
@@ -253,8 +253,8 @@ paymentButton.addEventListener("click", () => {
     comboSeleccionado = takeSale(selectedZones, validCombos)
     totalToPay = recalcPayment(selectedZones, comboSeleccionado, validZones)
     totalToPay > 0 ?
-    totalPrice.innerHTML = `<h5 class="modal-title text-center" id="exampleModalLabel">El total de su compra es: ${totalToPay}</h5>` :
-    totalPrice.innerHTML = `<h5 class="modal-title text-center" id="exampleModalLabel">NO hay elementos en su carrito.</h5>` 
+    (totalPrice.innerHTML = `<h5 class="modal-title text-center" id="exampleModalLabel">El total de su compra es: ${totalToPay}</h5>`, finalizePurchaseButton.style.display = "block") :
+    (totalPrice.innerHTML = `<h5 class="modal-title text-center" id="exampleModalLabel">NO hay elementos en su carrito.</h5>`, finalizePurchaseButton.style.display = "none" )
 })
 
 comboButton.addEventListener("click", () => {
@@ -272,6 +272,13 @@ finalizePurchaseButton.addEventListener("click", () => {
     localStorage.setItem("selectedZones", JSON.stringify(selectedZones));
     console.log("Compra finalizada.");
     showZones(validZones)
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Su compra se realizó correctamente.',
+        showConfirmButton: false,
+        timer: 1500
+      })
 })
 
 // CÓDIGO
