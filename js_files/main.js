@@ -282,4 +282,4 @@ finalizePurchaseButton.addEventListener("click", () => {
 })
 
 // CÓDIGO
-showZones(validZones)
+main();
