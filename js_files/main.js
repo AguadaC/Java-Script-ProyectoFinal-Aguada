@@ -45,6 +45,7 @@ function showZones(array){
          () => {
             toggleStyle(selectToggleBtn, cardBody);
             addRemoveZone(zone);
+            showToastify(zone)
             }
         );
     }
@@ -87,6 +88,31 @@ function addRemoveZone(zone) {
     }
 
     localStorage.setItem("selectedZones", JSON.stringify(selectedZones))
+}
+function showToastify(zone) {
+    // Chequeo si esta seleccionado
+    let exist = selectedZones.filter(
+        (element) => element.name == zone.name
+    )
+    let action_applied
+    if (exist.length != 0) {
+        action_applied = "agregada"
+    } else {
+        action_applied = "eliminada"
+    }
+    Toastify({
+        text: `La zona ${zone.name} fue ${action_applied}`,
+        duration: 2000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+          background: "#042563",
+        },
+        onClick: function(){}
+      }).showToast();
 }
 
 function priceDesc(array){
