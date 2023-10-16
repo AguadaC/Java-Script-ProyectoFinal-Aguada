@@ -180,7 +180,7 @@ function recalcPayment(selectedZones, comboSeleccionado){
         validCombos.find(
             combo => combo.get_combo_name() === comboSeleccionado.get_combo_name()
         )){
-        console.log(`Combo validado: ${comboSeleccionado.get_combo_name()}`)
+        console.log(`Combo validado: ${comboSeleccionado.get_combo_name()} $${comboSeleccionado.get_combo_price()}`)
 
         combinedPrice = comboSeleccionado.get_combo_price()
         for (let comboElementName of comboSeleccionado.get_combo_name().split("-")){

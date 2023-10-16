@@ -54,11 +54,11 @@ const area_barba = new BodyArea("BARBA", 1200, "body.png");
 
 
 // Combos
-const combo_a = new Combo("AXILA-CAVADO-TIRO-MEDIA_PIERNA", 2500);
-const combo_b = new Combo("AXILA-CAVADO-TIRO", 1600);
-const combo_c = new Combo("AXILA-CAVADO", 1400);
-const combo_d = new Combo("AXILA-BOZO", 1000);
-const combo_e = new Combo("AXILA-CAVADO-TIRO-PIERNA_COMPLETA", 3200);
+const combo_a = new Combo("AXILA-CAVADO-TIRO-PIERNA_COMPLETA", 3200);
+const combo_b = new Combo("AXILA-CAVADO-TIRO-MEDIA_PIERNA", 2500);
+const combo_c = new Combo("AXILA-CAVADO-TIRO", 1600);
+const combo_d = new Combo("AXILA-CAVADO", 1400);
+const combo_e = new Combo("AXILA-BOZO", 1000);
 
 // Arrays contenedores
 // Seteamos validZones
