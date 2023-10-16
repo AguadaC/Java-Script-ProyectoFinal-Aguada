@@ -272,13 +272,16 @@ finalizePurchaseButton.addEventListener("click", () => {
     localStorage.setItem("selectedZones", JSON.stringify(selectedZones));
     console.log("Compra finalizada.");
     showZones(validZones)
+    //borro el placeholder de Search
+    search.value =""
+    selectOrder.selectedIndex = 0
     Swal.fire({
         position: 'center',
         icon: 'success',
         title: 'Su compra se realizó correctamente.',
         showConfirmButton: false,
         timer: 1500
-      })
+    })
 })
 
 // CÓDIGO
