@@ -231,6 +231,7 @@ function searchZones(search, array){
 // EVENTOS
 selectOrder.addEventListener("change", () => {
     console.log(selectOrder.value)
+    search.value =""
     switch(selectOrder.value){
         case "1":
             priceDesc(validZones)
@@ -263,6 +264,7 @@ comboButton.addEventListener("click", () => {
 })
 
 search.addEventListener("input", ()=> {
+    selectOrder.selectedIndex = 0
     searchZones(search, validZones)
 }
 )
