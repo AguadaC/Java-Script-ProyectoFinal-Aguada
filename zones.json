@@ -1,0 +1,97 @@
+[
+    {
+      "name": "BOZO",
+      "price": 600,
+      "image": "body.png"
+    },
+    {
+      "name": "ROSTRO_COMPLETO",
+      "price": 1500,
+      "image": "body.png"
+    },
+    {
+      "name": "MENTON_BOZO",
+      "price": 800,
+      "image": "body.png"
+    },
+    {
+      "name": "NUCA",
+      "price": 800,
+      "image": "body.png"
+    },
+    {
+      "name": "ESPALDA",
+      "price": 1500,
+      "image": "body.png"
+    },
+    {
+      "name": "MEDIA_ESPALDA",
+      "price": 900,
+      "image": "body.png"
+    },
+    {
+      "name": "PECHO",
+      "price": 900,
+      "image": "body.png"
+    },
+    {
+      "name": "AXILA",
+      "price": 1000,
+      "image": "body.png"
+    },
+    {
+      "name": "ABDOMEN",
+      "price": 900,
+      "image": "body.png"
+    },
+    {
+      "name": "BRAZO_COMPLETO",
+      "price": 1500,
+      "image": "body.png"
+    },
+    {
+      "name": "MEDIO_BRAZO",
+      "price": 900,
+      "image": "body.png"
+    },
+    {
+      "name": "CAVADO",
+      "price": 1500,
+      "image": "body.png"
+    },
+    {
+      "name": "TIRO",
+      "price": 800,
+      "image": "body.png"
+    },
+    {
+      "name": "GLUTEOS",
+      "price": 1000,
+      "image": "body.png"
+    },
+    {
+      "name": "LINEA_ALBA",
+      "price": 600,
+      "image": "body.png"
+    },
+    {
+      "name": "PIERNA_COMPLETA",
+      "price": 2000,
+      "image": "body.png"
+    },
+    {
+      "name": "MEDIA_PIERNA",
+      "price": 1500,
+      "image": "body.png"
+    },
+    {
+      "name": "EMPEINE_DEDOS",
+      "price": 800,
+      "image": "body.png"
+    },
+    {
+      "name": "BARBA",
+      "price": 1200,
+      "image": "body.png"
+    }
+]

@@ -54,44 +54,29 @@ const area_barba = new BodyArea("BARBA", 1200, "body.png");
 
 
 // Combos
-const combo_a = new Combo("AXILA-CAVADO-TIRO-MEDIA_PIERNA", 2500);
-const combo_b = new Combo("AXILA-CAVADO-TIRO", 1600);
-const combo_c = new Combo("AXILA-CAVADO", 1400);
-const combo_d = new Combo("AXILA-BOZO", 1000);
-const combo_e = new Combo("AXILA-CAVADO-TIRO-PIERNA_COMPLETA", 3200);
+const combo_a = new Combo("AXILA-CAVADO-TIRO-PIERNA_COMPLETA", 3200);
+const combo_b = new Combo("AXILA-CAVADO-TIRO-MEDIA_PIERNA", 2500);
+const combo_c = new Combo("AXILA-CAVADO-TIRO", 1600);
+const combo_d = new Combo("AXILA-CAVADO", 1400);
+const combo_e = new Combo("AXILA-BOZO", 1000);
 
 // Arrays contenedores
 // Seteamos validZones
 const validZones = []
-if(localStorage.getItem("validZones")){
-    for(let zone of JSON.parse(localStorage.getItem("validZones"))){
-        let new_zone_to_save = new BodyArea (zone.name, zone.price, zone.image)
-        validZones.push(new_zone_to_save)
-   }
+async function main(){
+    if(localStorage.getItem("validZones")){
+        for(let zone of JSON.parse(localStorage.getItem("validZones"))){
+            let new_zone_to_save = new BodyArea (zone.name, zone.price, zone.image)
+            validZones.push(new_zone_to_save)
+    }
 
-}else{
-   console.log("Primera carga de Zonas")
-   validZones.push(
-    area_bozo,
-    area_rostro_completo,
-    area_menton_bozo,
-    area_nuca,
-    area_espalda,
-    area_media_espalda,
-    area_pecho,
-    area_axila,
-    area_abdomen,
-    area_brazo_completo,
-    area_medio_brazo,
-    area_cavado,
-    area_tiro,
-    area_gluteos,
-    area_linea_alba,
-    area_pierna_completa,
-    area_media_pierna,
-    area_empeine_dedos,
-    area_barba);
-   localStorage.setItem("validZones", JSON.stringify(validZones))
+    }else{
+    console.log("Primera carga de Zonas")
+    const loadedZones = await firstLoad()
+    validZones.push(...loadedZones)
+    localStorage.setItem("validZones", JSON.stringify(validZones))
+    }
+    showZones(validZones);
 }
 
 // Seteamos validCombos
@@ -116,4 +101,16 @@ if (localStorage.getItem("selectedZones")){
     }
 }else{
     localStorage.setItem("selectedZones", JSON.stringify(selectedZones))
+}
+
+async function firstLoad(){
+    const loadedZones = []
+    const resp = await fetch("zones.json");
+    const zonesJson = await resp.json();
+    for (let zone of zonesJson) {
+        let new_zone_to_save = new BodyArea(zone.name, zone.price, zone.image);
+        loadedZones.push(new_zone_to_save);
+    }
+    console.log(loadedZones)
+    return loadedZones
 }

@@ -1,22 +1,12 @@
-# PreEntrega3-Aguada
-Segunda pre entrega del curso de javascrip dictado por Coder House. Comisión: 47045
-
-Implementaciones respecto a la consigna.
-- Uso de JSON y STORGE: se usa para almacenar las variables globales del sistema como son:
-    - validZones
-    - validCombos
-    - selectedZones
-- Uso de DOM y detección de eventos: Todos los ingresos que se realizaban antes por promt y la información que se mostraba por alerts,
-ahora se ingresan por interacción con botones o inputs y se visualizan mediante estilos y otras interacciones.
-
+# ProyectoFinal+Aguada
 ## Formula de cálculo
 
 Para entender como funciona el cálculo de la sesión se debe tener en cuenta que existen combos de zonas que generan una disminucion en el precio.
 
-Si dentro de las zonas elegida, se puede armar un combo, el sistema usa al mismo para el cálculo. Si más de un combo es tenido en cuenta, se toma el de mayor valor.
+Si dentro de las zonas elegida, se puede armar un combo, el sistema usa el mismo para el cálculo. Si más de un combo es tenido en cuenta, se toma el de mayor valor.
 
 Ejemplo:
-- Si selecciono las zonas: Axila (1000), Bozo (600) y Cavado (1500), el precio individual es $3100.
+- Si selecciono las zonas: Axila (1000), Bozo (600) y Cavado (1500), el precio por zona individual es $3100.
 
 - Pero existen los combos:
     - Axila-Bozo a $ 1000
@@ -41,16 +31,39 @@ Ejemplo:
 
 - Busqueda de zona: Como hay muchas zonas, si se quisiese elegir una en particular, sin recorrer todas, puede colocar el nombre en el buscador.
     El mismo mostrará todas las coincidencias con el nombre buscado.
+    Si no hay coincidencia, mostrará el mensaje `Pruebe introduciendo otra zona`
 
     ![](./extern_resources/cardSearch.gif)
 
-- Visualización de combos: Cada zona, tiene un precio, pero si algún combo esta contenido en la selección, el cálculo del precio final, tengra en cuenta el precio del combo y no de las zonas individuales. Para poder ver cuales son estos combos, se puede accionar sobre el botón COMBOS que esta en amarillo.
+- Visualización de combos: Cada zona, tiene un precio, pero si algún combo esta contenido en la selección, el cálculo del precio final, tendrá en cuenta el precio del combo y no solo de las zonas individuales. Para poder ver cuales son estos combos, se puede accionar sobre el botón COMBOS que esta en amarillo.
 
     ![](./extern_resources/combos.gif)
 
 - Funcionalidad de pago: Una vez seleccionadas las zonas de interes, podemos ir al botón pagar. Esto nos permite realizar una verificación de lo seleccionado. Si obtamos por CERRAR, podemos seguir eligiendo zonas desde donde estabamos. De lo contrario, si obtamos por Finalizar compra, se reinicia la seleccion ya que se terminó la operación.
+No se habilita la posibilidad de finalizar compra si no se poseen elementos en el carrito.
 
     ![](./extern_resources/payment.gif)
+
+## Mejoras
+
+- Se agregan librerias:
+    - Toastify cuando se agrega o quita una zona al carrito.
+    - SweetAlert cuando se finaliza la compra.
+- Uso de promesas:
+    - Para agregar las zonas que se pueden seleccionar en el simulador (uso de fetch).
+- Se fixea una variable repetida que se usaba en dos ocaciones simultaneas, por lo que se autopisaba en la función. Ahora, cuando no se encuentra coincidencia en las zonas buscadas, muestra un mensaje.
+- Limpieza de los métodos de busqueda cuando se finaliza la compra.
+
+# PreEntrega3-Aguada
+Segunda pre entrega del curso de javascrip dictado por Coder House. Comisión: 47045
+
+Implementaciones respecto a la consigna.
+- Uso de JSON y STORGE: se usa para almacenar las variables globales del sistema como son:
+    - validZones
+    - validCombos
+    - selectedZones
+- Uso de DOM y detección de eventos: Todos los ingresos que se realizaban antes por promt y la información que se mostraba por alerts,
+ahora se ingresan por interacción con botones o inputs y se visualizan mediante estilos y otras interacciones.
 
 # PreEntrega2-Aguada
 Segunda pre entrega del curso de javascrip dictado por Coder House. Comisión: 47045

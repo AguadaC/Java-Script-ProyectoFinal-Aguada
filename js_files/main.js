@@ -45,6 +45,7 @@ function showZones(array){
          () => {
             toggleStyle(selectToggleBtn, cardBody);
             addRemoveZone(zone);
+            showToastify(zone)
             }
         );
     }
@@ -87,6 +88,31 @@ function addRemoveZone(zone) {
     }
 
     localStorage.setItem("selectedZones", JSON.stringify(selectedZones))
+}
+function showToastify(zone) {
+    // Chequeo si esta seleccionado
+    let exist = selectedZones.filter(
+        (element) => element.name == zone.name
+    )
+    let action_applied
+    if (exist.length != 0) {
+        action_applied = "agregada"
+    } else {
+        action_applied = "eliminada"
+    }
+    Toastify({
+        text: `La zona ${zone.name} fue ${action_applied}`,
+        duration: 2000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+          background: "#042563",
+        },
+        onClick: function(){}
+      }).showToast();
 }
 
 function priceDesc(array){
@@ -154,7 +180,7 @@ function recalcPayment(selectedZones, comboSeleccionado){
         validCombos.find(
             combo => combo.get_combo_name() === comboSeleccionado.get_combo_name()
         )){
-        console.log(`Combo validado: ${comboSeleccionado.get_combo_name()}`)
+        console.log(`Combo validado: ${comboSeleccionado.get_combo_name()} $${comboSeleccionado.get_combo_price()}`)
 
         combinedPrice = comboSeleccionado.get_combo_price()
         for (let comboElementName of comboSeleccionado.get_combo_name().split("-")){
@@ -172,7 +198,7 @@ function recalcPayment(selectedZones, comboSeleccionado){
     }
 
     combinedPrice = parseInt(combinedPrice) + parseInt(payment(zones_aux_copy))
-    console.log(`Precio combinado: ${combinedPrice}`)
+    console.log(`Precio: ${combinedPrice}`)
     return combinedPrice
 }
 
@@ -195,16 +221,17 @@ function uploadDetail(array, nodo){
 
 function searchZones(search, array){
     // Busco zona de interés
-    let itemsFound = array.filter(
+    let itemsFound_array = array.filter(
         (zone) => zone.name.toLowerCase().includes(search.value.toLowerCase())
     )
-    console.log(itemsFound)
-    itemsFound.length > 0 ? (showZones(itemsFound), itemsFound.innerText ="") : (showZones(array), itemsFound.innerText = `Pruebe introduciendo otra zona`) 
+    showZones(itemsFound_array)
+    itemsFound_array.length > 0 ? itemsFound.innerText ="" : itemsFound.innerText = `Pruebe introduciendo otra zona`
 }
 
 // EVENTOS
 selectOrder.addEventListener("change", () => {
     console.log(selectOrder.value)
+    search.value =""
     switch(selectOrder.value){
         case "1":
             priceDesc(validZones)
@@ -227,8 +254,8 @@ paymentButton.addEventListener("click", () => {
     comboSeleccionado = takeSale(selectedZones, validCombos)
     totalToPay = recalcPayment(selectedZones, comboSeleccionado, validZones)
     totalToPay > 0 ?
-    totalPrice.innerHTML = `<h5 class="modal-title text-center" id="exampleModalLabel">El total de su compra es: ${totalToPay}</h5>` :
-    totalPrice.innerHTML = `<h5 class="modal-title text-center" id="exampleModalLabel">NO hay elementos en su carrito.</h5>` 
+    (totalPrice.innerHTML = `<h5 class="modal-title text-center" id="exampleModalLabel">El total de su compra es: ${totalToPay}</h5>`, finalizePurchaseButton.style.display = "block") :
+    (totalPrice.innerHTML = `<h5 class="modal-title text-center" id="exampleModalLabel">NO hay elementos en su carrito.</h5>`, finalizePurchaseButton.style.display = "none" )
 })
 
 comboButton.addEventListener("click", () => {
@@ -237,6 +264,7 @@ comboButton.addEventListener("click", () => {
 })
 
 search.addEventListener("input", ()=> {
+    selectOrder.selectedIndex = 0
     searchZones(search, validZones)
 }
 )
@@ -246,7 +274,18 @@ finalizePurchaseButton.addEventListener("click", () => {
     localStorage.setItem("selectedZones", JSON.stringify(selectedZones));
     console.log("Compra finalizada.");
     showZones(validZones)
+    //borro el placeholder de Search
+    search.value =""
+    //reinicio el ordenador
+    selectOrder.selectedIndex = 0
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Su compra se realizó correctamente.',
+        showConfirmButton: false,
+        timer: 1500
+    })
 })
 
 // CÓDIGO
-showZones(validZones)
+main();
