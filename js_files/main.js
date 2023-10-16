@@ -221,11 +221,11 @@ function uploadDetail(array, nodo){
 
 function searchZones(search, array){
     // Busco zona de interés
-    let itemsFound = array.filter(
+    let itemsFound_array = array.filter(
         (zone) => zone.name.toLowerCase().includes(search.value.toLowerCase())
     )
-    console.log(itemsFound)
-    itemsFound.length > 0 ? (showZones(itemsFound), itemsFound.innerText ="") : (showZones(array), itemsFound.innerText = `Pruebe introduciendo otra zona`) 
+    showZones(itemsFound_array)
+    itemsFound_array.length > 0 ? itemsFound.innerText ="" : itemsFound.innerText = `Pruebe introduciendo otra zona`
 }
 
 // EVENTOS
