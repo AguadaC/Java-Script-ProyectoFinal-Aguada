@@ -274,6 +274,7 @@ finalizePurchaseButton.addEventListener("click", () => {
     showZones(validZones)
     //borro el placeholder de Search
     search.value =""
+    //reinicio el ordenador
     selectOrder.selectedIndex = 0
     Swal.fire({
         position: 'center',
